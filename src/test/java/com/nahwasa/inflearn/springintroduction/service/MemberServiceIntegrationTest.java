@@ -15,6 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * 스프링 컨테이너까지 올려서 테스트하는 것 보다, 단위 테스트가 좀 더 좋은 테스트일 확률이 높다고 함.
+ *
+ * 강사님 회사 기준 개발자들 코드 짜는 비율이 테스트 코드가 60~70%로 더 높다고 함.
  */
 @SpringBootTest // 스프링 컨테이너와 테스트를 함께 실행한다.
 @Transactional  // 테스트 시작 전에 트랜잭션 걸고, 각 테스트마다 rollback 해줌. 지우면 db에 들어가므로 다른 테스트에 영향 끼침.

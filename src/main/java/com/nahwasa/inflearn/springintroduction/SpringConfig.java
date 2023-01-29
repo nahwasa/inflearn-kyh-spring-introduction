@@ -1,6 +1,7 @@
 package com.nahwasa.inflearn.springintroduction;
 
 import com.nahwasa.inflearn.springintroduction.repository.JdbcMemberRepository;
+import com.nahwasa.inflearn.springintroduction.repository.JdbcTemplateMemberRepository;
 import com.nahwasa.inflearn.springintroduction.repository.MemberRepository;
 import com.nahwasa.inflearn.springintroduction.service.MemberService;
 import org.springframework.context.annotation.Bean;
@@ -33,6 +34,7 @@ public class SpringConfig {
     @Bean
     public MemberRepository memberRepository() {    // 다른 부분 손대지 않고 여기에 Bean만 어떤걸로 만들지만 수정함.
 //        return new MemoryMemberRepository();
-        return new JdbcMemberRepository(dataSource);
+//        return new JdbcMemberRepository(dataSource);
+        return new JdbcTemplateMemberRepository(dataSource);
     }
 }
