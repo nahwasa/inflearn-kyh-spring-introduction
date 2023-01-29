@@ -1,13 +1,21 @@
 package com.nahwasa.inflearn.springintroduction;
 
+import com.nahwasa.inflearn.springintroduction.repository.JdbcMemberRepository;
 import com.nahwasa.inflearn.springintroduction.repository.MemberRepository;
-import com.nahwasa.inflearn.springintroduction.repository.MemoryMemberRepository;
 import com.nahwasa.inflearn.springintroduction.service.MemberService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.sql.DataSource;
+
 @Configuration
 public class SpringConfig {
+
+    private final DataSource dataSource;
+
+    public SpringConfig(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     /**
      * @Service랑 @Repository 쓰지 않고 직접 스프링 컨테이너에 등록하는 방법임.
@@ -23,7 +31,8 @@ public class SpringConfig {
     }
 
     @Bean
-    public MemberRepository memberRepository() {
-        return new MemoryMemberRepository();
+    public MemberRepository memberRepository() {    // 다른 부분 손대지 않고 여기에 Bean만 어떤걸로 만들지만 수정함.
+//        return new MemoryMemberRepository();
+        return new JdbcMemberRepository(dataSource);
     }
 }
