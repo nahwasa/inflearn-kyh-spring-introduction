@@ -1,9 +1,9 @@
 package com.nahwasa.inflearn.springintroduction;
 
-import com.nahwasa.inflearn.springintroduction.repository.JdbcMemberRepository;
-import com.nahwasa.inflearn.springintroduction.repository.JdbcTemplateMemberRepository;
+import com.nahwasa.inflearn.springintroduction.repository.JpaMemberRepository;
 import com.nahwasa.inflearn.springintroduction.repository.MemberRepository;
 import com.nahwasa.inflearn.springintroduction.service.MemberService;
+import jakarta.persistence.EntityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,9 +13,11 @@ import javax.sql.DataSource;
 public class SpringConfig {
 
     private final DataSource dataSource;
+    private final EntityManager em;
 
-    public SpringConfig(DataSource dataSource) {
+    public SpringConfig(DataSource dataSource, EntityManager em) {
         this.dataSource = dataSource;
+        this.em = em;
     }
 
     /**
@@ -35,6 +37,8 @@ public class SpringConfig {
     public MemberRepository memberRepository() {    // 다른 부분 손대지 않고 여기에 Bean만 어떤걸로 만들지만 수정함.
 //        return new MemoryMemberRepository();
 //        return new JdbcMemberRepository(dataSource);
-        return new JdbcTemplateMemberRepository(dataSource);
+//        return new JdbcTemplateMemberRepository(dataSource);
+        return new JpaMemberRepository(em);
     }
+
 }
